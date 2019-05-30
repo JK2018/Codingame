@@ -14,15 +14,15 @@ class Solution {
     static final String LONG = "lon";
     static final String LATI = "lat";
 
-    static float convert_to_float(String value){
+    static float convertToFloat(String value){
         return Float.parseFloat(value.replace(",","."));
     }
 
-    static double return_distance(String dlon, String dlat, String lon,String lat){
-        float fdlon = convert_to_float(dlon);
-        float fdlat = convert_to_float(dlat);
-        float flon = convert_to_float(lon);
-        float flat = convert_to_float(lat);
+    static double returnDistance(String dlon, String dlat, String lon,String lat){
+        float fdlon = convertToFloat(dlon);
+        float fdlat = convertToFloat(dlat);
+        float flon = convertToFloat(lon);
+        float flat = convertToFloat(lat);
         double x = (fdlon - flon) * Math.cos((flat + fdlat)/2);
         double y = (fdlat-flat);
         return (Math.sqrt(x*x + y*y) * 6371);
@@ -53,7 +53,7 @@ class Solution {
         double minDist = Double.MAX_VALUE;
         if (defibArray.size() >1){
             for (Map<String,String> df:defibArray) {
-                double distance = return_distance(df.get(LONG),df.get(LATI),LON,LAT);
+                double distance = returnDistance(df.get(LONG),df.get(LATI),LON,LAT);
                 if (distance < minDist){
                     minDist = distance;
                     nearestDefMap = df;
