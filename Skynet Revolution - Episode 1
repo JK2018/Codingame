@@ -1,0 +1,66 @@
+/**
+ * Auto-generated code below aims at helping you parse
+ * the standard input according to the problem statement.
+ **/
+
+var inputs = readline().split(' ');
+var N = parseInt(inputs[0]); // the total number of nodes in the level, including the gateways
+var L = parseInt(inputs[1]); // the number of links
+var E = parseInt(inputs[2]); // the number of exit gateways
+
+
+var links = [];
+  for (var i = 0; i < L; i++) {
+    var inputs = readline().split(' ');
+    var N1 = parseInt(inputs[0]); // N1 and N2 defines a link between these nodes
+    var N2 = parseInt(inputs[1]);
+    links.push(N1+" "+N2)
+    links.push(N2+" "+N1)
+ }
+
+var exits =  Array();
+for (var i = 0; i < E; i++) {
+    var EI = parseInt(readline()); // the index of a gateway node
+   exits.push(EI)
+}
+
+printErr('liens '+links.join(";"));
+
+while (true) {
+    
+    
+    var SI = parseInt(readline()); // The index of the node on which the Skynet agent is positioned this turn
+    var link=""; 
+    var linkProx=""; 
+    var n1=0;
+    var n2=0;
+  
+  
+     for(j = 0; j < exits.length; j++){
+      EI = exits[j];
+      printErr('Getway exit  = ...'+EI);
+      
+      for(i = 0; i < links.length; i++){
+        if(links.indexOf(EI+" "+SI)!=-1){
+        link = EI+" "+SI;
+        linkProx=link;
+        break;
+        } else {
+            n1=links[i].split(" ")[0];
+            n2=links[i].split(" ")[1];
+        
+            if(links.indexOf(n2+" "+SI)!=-1 && links.indexOf(EI+" "+n2)!=-1){
+            printErr('pour n1='+n1+" ; n2="+n2 );
+            link = n2+" "+SI;
+            break;
+            }
+        }
+ 
+  }
+}
+  
+if(linkProx !==""){
+    link=linkProx;
+}
+print(link)                             
+}
