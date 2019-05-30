@@ -1,0 +1,65 @@
+import java.util.*;
+import java.io.*;
+import java.math.*;
+import java.lang.*;
+
+/**
+ * Auto-generated code below aims at helping you parse
+ * the standard input according to the problem statement.
+ **/
+class Solution {
+
+    public static void main(String args[]) {
+        Scanner in = new Scanner(System.in);
+        String MESSAGE = in.nextLine();
+        System.err.println("message : "+MESSAGE);
+ 
+        
+        
+        //message to binary
+  byte[] bytes = MESSAGE.getBytes();
+  StringBuilder binary = new StringBuilder();
+  for (byte b : bytes)
+  {
+     int val = b;
+     for (int i = 0; i < 8; i++)
+     {
+        binary.append((val & 128) == 0 ? 0 : 1);
+        val <<= 1;
+     }
+  }
+    int t = binary.length()-1;
+    for(int h=t;h>=0;h--){
+        if(h%8==0){
+            binary.deleteCharAt(h);
+        }}
+  System.err.println("'" + MESSAGE + "' to binary: " + binary);
+    
+ 
+ 
+ 
+ //encoding binary to Chuck Chuck's unary msg
+String result = "";
+String[] binArray = binary.toString().split("(?<=(.))(?!\\1)");
+
+
+ for(int j=0;j<binArray.length;j++){//j=1 because of first unwanted 0...
+        if(binArray[j].substring(0, 1).contains("1")){
+            result += "0 ";
+            for(int k=0;k<binArray[j].length();k++){result += "0";}
+            result += " ";
+        }
+        if(binArray[j].substring(0, 1).contains("0")){
+            result += "00 ";
+            for(int l=0;l<binArray[j].length();l++){result += "0";}
+            result += " ";
+        }
+     }
+    result = result.substring(0, result.length()-1);
+ 
+
+
+
+ System.out.println(result);
+    }
+}
