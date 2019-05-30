@@ -1,0 +1,31 @@
+import java.util.*;
+import java.io.*;
+import java.math.*;
+
+/**
+ * Auto-generated code below aims at helping you parse
+ * the standard input according to the problem statement.
+ **/
+class Solution {
+
+    public static void main(String args[]) {
+        Scanner in = new Scanner(System.in);
+        String expression = in.next();
+
+      Vector<Character> openB = new Vector<Character>();
+        openB.add('#');
+        for (int i=0;i<expression.length();i++){
+            char c=expression.charAt(i);
+            if (c=='('||c=='{'||c=='[') {openB.add(0,c);
+            }else if (c==')'||c=='}'||c==']'){
+                char open=openB.elementAt(0);
+                String brk=open+""+c;
+                System.err.println(brk);
+                if (!brk.equals("()") && !brk.equals("{}") && !brk.equals("[]")){
+                    System.out.println("false");return;}
+                openB.removeElementAt(0);
+            }
+        }
+        System.out.println(openB.size()==1);
+    }
+}
