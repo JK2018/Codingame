@@ -1,0 +1,257 @@
+import java.util.*;
+import java.io.*;
+import java.math.*;
+
+/**
+ * Auto-generated code below aims at helping you parse
+ * the standard input according to the problem statement.
+ **/
+class Player {
+
+    public static void main(String args[]) {
+        Scanner in = new Scanner(System.in);
+        int W = in.nextInt(); // width of the building.
+        int H = in.nextInt(); // height of the building.
+        int N = in.nextInt(); // maximum number of turns before game over.
+        int X0 = in.nextInt();
+        int Y0 = in.nextInt();
+        int prevMinX = 0;
+        int prevMinY = 0;
+        int prevMaxX = W-1;
+        int prevMaxY = H-1;
+        // game loop
+        while (true) {
+            String bombDir = in.next(); // the direction of the bombs from batman's current location (U, UR, R, DR, D, DL, L or UL)
+
+
+            System.err.println("width : "+W);
+            System.err.println("height : "+H);
+            System.err.println("batX : "+X0);
+            System.err.println("batY : "+Y0);
+            System.err.println("bomb dir : '"+bombDir+"'");
+            System.err.println("index of L"+bombDir.indexOf("L"));
+            System.err.println("index of R"+bombDir.indexOf("R"));
+            System.err.println("index of D"+bombDir.indexOf("D"));
+            System.err.println("index of U"+bombDir.indexOf("U"));
+            
+            int xMin = 0;
+            int yMin = 0;
+            int xMax = W-1;
+            int yMax = H-1;
+            
+    
+                // UR // ***
+            if(bombDir.indexOf("U")==0 && bombDir.indexOf("R")==1){
+                if(Y0==1 && X0==W-2){//avant derniere case en haut a droite
+                    yMax=Y0; 
+                    prevMaxY=Y0;
+                    Y0=(prevMinY+prevMaxY)/2;
+                    xMin=X0;
+                    prevMinX=X0;
+                    X0=(prevMinX+prevMaxX+1)/2;
+                    System.out.println(X0+" "+Y0);
+                    }
+                else if(Y0==1 && X0!=W-2){//avant derniere case en haut
+                    yMax=Y0;
+                    prevMaxY=Y0;
+                    Y0=(prevMinY+prevMaxY)/2;
+                    xMin=X0;
+                    prevMinX=X0;
+                    X0=(prevMinX+prevMaxX)/2;
+                    System.out.println(X0+" "+Y0);
+                    }
+                else if(Y0!=1 && X0==W-2){//avant derniere case a droite
+                    yMax=Y0; 
+                    prevMaxY=Y0;
+                    Y0=(prevMinY+prevMaxY)/2;
+                    xMin=X0;
+                    prevMinX=X0;
+                    X0=(prevMinX+prevMaxX+1)/2;
+                    System.out.println(X0+" "+Y0);
+                    }
+                else{//autres cases
+                    yMax=Y0; 
+                    prevMaxY=Y0;
+                    Y0=(prevMinY+prevMaxY)/2;
+                    xMin=X0;
+                    prevMinX=X0;
+                    X0=(prevMinX+prevMaxX)/2;
+                    System.out.println(X0+" "+Y0);
+                    }}
+                
+                // UL // ***
+            if(bombDir.indexOf("U")==0 && bombDir.indexOf("L")==1){
+                if(Y0==1 && X0==1){//avant derniere case en haut a gauche
+                    yMax=Y0; 
+                    prevMaxY=Y0;
+                    Y0=(prevMinY+prevMaxY)/2;
+                    xMin=X0;
+                    prevMaxX=X0;
+                    X0=(prevMinX+prevMaxX)/2;
+                    System.out.println(X0+" "+Y0);
+                    }
+                else if(Y0==1 && X0!=1){//avant derniere case en haut
+                    yMax=Y0; 
+                    prevMaxY=Y0;
+                    Y0=(prevMinY+prevMaxY)/2;
+                    xMin=X0;
+                    prevMaxX=X0;
+                    X0=(prevMinX+prevMaxX)/2;
+                    System.out.println(X0+" "+Y0);
+                    }
+                else if(Y0!=1 && X0==1){//avant derniere case a gauche
+                    yMax=Y0; 
+                    prevMaxY=Y0;
+                    Y0=(prevMinY+prevMaxY)/2;
+                    xMin=X0;
+                    prevMaxX=X0;
+                    X0=(prevMinX+prevMaxX)/2;
+                    System.out.println(X0+" "+Y0);
+                    }
+                else{//autres cases
+                    yMax=Y0; 
+                    prevMaxY=Y0;
+                    Y0=(prevMinY+prevMaxY)/2;
+                    xMin=X0;
+                    prevMaxX=X0;
+                    X0=(prevMinX+prevMaxX)/2;
+                    System.out.println(X0+" "+Y0);
+                }}
+                
+                // DR // ***
+            if(bombDir.indexOf("D")==0 && bombDir.indexOf("R")==1){
+                if(Y0==H-2 && X0==W-2){//avant derniere case en bas a droite
+                    yMin=Y0;
+                    prevMinY=Y0;
+                    Y0=((prevMinY+prevMaxY+1)/2);
+                    xMin=X0;
+                    prevMinX=X0;
+                    X0=((prevMinX+prevMaxX+1)/2);
+                    System.out.println(X0+" "+Y0);
+                }else if(Y0!=H-2 && X0==W-2){//avant derniere case a droite
+                    yMin=Y0;
+                    prevMinY=Y0;
+                    Y0=((prevMinY+prevMaxY)/2);
+                    xMin=X0;
+                    prevMinX=X0;
+                    X0=((prevMinX+prevMaxX+1)/2);
+                    System.out.println(X0+" "+Y0);
+                }else if(Y0==H-2 && X0!=W-2){//avant derniere case en bas
+                    yMin=Y0;
+                    prevMinY=Y0;
+                    Y0=((prevMinY+prevMaxY+1)/2);
+                    xMin=X0;
+                    prevMinX=X0;
+                    X0=((prevMinX+prevMaxX)/2);
+                    System.out.println(X0+" "+Y0);
+                    }
+                else{//autres cases
+                    yMin=Y0;
+                    prevMinY=Y0;
+                    Y0=(prevMinY+prevMaxY)/2;
+                    xMin=X0;
+                    prevMinX=X0;
+                    X0=(prevMinX+prevMaxX)/2;
+                    System.out.println(X0+" "+Y0);
+                }}
+                
+                // DL // ***
+            if(bombDir.indexOf("D")==0 && bombDir.indexOf("L")==1){
+                if(X0 == 1 && Y0==H-2){//avant derniere case en bas a gauche
+                    yMin=Y0;
+                    prevMinY=Y0;
+                    Y0=(prevMinY+prevMaxY+1)/2;
+                    xMax=X0;
+                    prevMaxX=X0;
+                    X0=(prevMinX+prevMaxX)/2;
+                    System.out.println(X0+" "+Y0);
+                    }
+                else if(X0==1 && Y0!=H-2){//avant derniere case a gauche
+                    yMin=Y0;
+                    prevMinY=Y0;
+                    Y0=(prevMinY+prevMaxY)/2;
+                    xMax=X0;
+                    prevMaxX=X0;
+                    X0=(prevMinX+prevMaxX)/2;
+                    System.out.println(X0+" "+Y0);
+                    }
+                else if(X0!=1 && Y0==H-2){//avant derniere case en bas
+                    yMin=Y0;
+                    prevMinY=Y0;
+                    Y0=(prevMinY+prevMaxY+1)/2;
+                    xMax=X0;
+                    prevMaxX=X0;
+                    X0=(prevMinX+prevMaxX)/2;
+                    System.out.println(X0+" "+Y0);
+                    }
+                else{//autre cases
+                    yMin=Y0;
+                    prevMinY=Y0;
+                    Y0=(prevMinY+prevMaxY)/2;
+                    xMax=X0;
+                    prevMaxX=X0;
+                    X0=(prevMinX+prevMaxX)/2;
+                    System.out.println(X0+" "+Y0);
+                    }}
+                
+                // L // ***
+            if(bombDir.indexOf("L")==0 && bombDir.indexOf("U")!=0 && bombDir.indexOf("D")!=0){
+                if(X0==1){// avant derniere case vers la gauche
+                    xMax=X0;
+                    prevMaxX=X0;
+                    X0=(prevMinX+prevMaxX)/2;
+                    System.out.println(X0+" "+Y0);
+                    }
+                else{//autre cases
+                    xMax=X0;
+                    prevMaxX=X0;
+                    X0=(prevMinX+prevMaxX)/2;
+                    System.out.println(X0+" "+Y0);
+                    }}
+                
+                // R // ***
+            if(bombDir.indexOf("R")==0 && bombDir.indexOf("U")!=0 && bombDir.indexOf("D")!=0){
+                if(X0==W-2){// avant derniere case vers la droite
+                    xMin=X0;
+                    prevMinX=X0;
+                    X0=(prevMinX+prevMaxX+1)/2;
+                    System.out.println(X0+" "+Y0);
+                    }
+                else{//autre cases
+                    xMin=X0;
+                    prevMinX=X0;
+                    X0=(prevMinX+prevMaxX)/2;
+                    System.out.println(X0+" "+Y0);
+                }}
+                
+                // D // ***
+            if(bombDir.indexOf("D")==0 && bombDir.indexOf("R")!=1 && bombDir.indexOf("L")!=1){
+                if(Y0==H-2){// avant derniere case vers le bas
+                    prevMinY=Y0;
+                    Y0=(prevMinY+prevMaxY+1)/2;
+                    System.out.println(X0+" "+Y0);
+                    }
+                else{//autres cases
+                    yMin=Y0;
+                    prevMinY=Y0;
+                    Y0=(prevMinY+prevMaxY)/2;
+                    System.out.println(X0+" "+Y0);
+                    }}
+                
+                // U // ***
+            if(bombDir.indexOf("U")==0 && bombDir.indexOf("R")!=1 && bombDir.indexOf("L")!=1){
+                if(Y0==1){//avant derniere case vers le haut
+                    yMax=Y0;
+                    prevMaxY=Y0;
+                    Y0=(prevMinY+prevMaxY)/2;
+                    System.out.println(X0+" "+Y0);
+                    }
+                else{//autres cases
+                    yMax=Y0;
+                    prevMaxY=Y0;
+                    Y0=(prevMinY+prevMaxY)/2;
+                    System.out.println(X0+" "+Y0);
+                }}
+                 }  
+    }
+}
