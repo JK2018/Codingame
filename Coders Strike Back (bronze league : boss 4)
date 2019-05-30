@@ -1,0 +1,105 @@
+import java.util.*;
+import java.io.*;
+import java.math.*;
+
+/**
+ * Auto-generated code below aims at helping you parse
+ * the standard input according to the problem statement.
+ **/
+class Player {
+
+    public static void main(String args[]) {
+        Scanner in = new Scanner(System.in);
+        
+        int previousCheckpointX = 0;
+         boolean hasBoost = true;
+        
+        // game loop
+        while (true) {
+           
+            int x = in.nextInt();
+            int y = in.nextInt();
+            int nextCheckpointX = in.nextInt(); // x position of the next check point
+            int nextCheckpointY = in.nextInt(); // y position of the next check point
+            int nextCheckpointDist = in.nextInt(); // distance to the next checkpoint
+            int nextCheckpointAngle = in.nextInt(); // angle between your pod orientation and the direction of the next checkpoint
+            int opponentX = in.nextInt();
+            int opponentY = in.nextInt();
+            String thrust = "100";
+            
+     
+  
+
+    if(nextCheckpointDist < 1000 ){previousCheckpointX = x;}
+
+    if(x<nextCheckpointX){//next à droite
+        if(nextCheckpointX-previousCheckpointX>7000){//long dist
+            if(nextCheckpointDist < 1700){//arriving at next
+                thrust = "0";
+            }else if(nextCheckpointDist>1500){ //leaving prev before long dist return
+                if( Math.abs(nextCheckpointAngle)>120){thrust ="5";}
+                if( Math.abs(nextCheckpointAngle)<120){thrust ="40";}
+                if( Math.abs(nextCheckpointAngle)<90){thrust ="65";}
+                if( Math.abs(nextCheckpointAngle)<80){thrust ="90";}
+                if( Math.abs(nextCheckpointAngle)<65){thrust ="100";}
+            }else{thrust = "100";}//cruising
+        }
+        else {// short dist
+            if(nextCheckpointAngle > 90){ thrust = "20";}
+            if( nextCheckpointAngle < 90){ thrust = "45";}
+            if( nextCheckpointAngle < 70){ thrust = "75";}
+            if( nextCheckpointAngle < 40){ thrust = "100";}
+            if(nextCheckpointDist < 1000 && nextCheckpointAngle < 40 ){ thrust = "40";}
+            if(nextCheckpointDist < 500 && nextCheckpointAngle < 40 ){
+                //if(Math.abs(opponentX-x)<400 && Math.abs(opponentY-y)<400 && opponentX>x && opponentY<y){thrust = "99";} 
+                //else if(Math.abs(x-opponentX)<400 && Math.abs(y-opponentY)<400 && x>opponentX && y>opponentY){thrust = "98";}
+                //else {
+                    thrust = "30";}//}
+        }
+    }
+    else if(x>nextCheckpointX){//next à gauche
+        if(Math.abs((previousCheckpointX-nextCheckpointX))>7000){//long dist
+            if(nextCheckpointDist < 1700){//arriving at next
+                thrust = "0";
+            }else if(nextCheckpointDist>1500){ //leaving prev before long dist return
+                if( Math.abs(nextCheckpointAngle)>120){thrust ="5";}
+                if( Math.abs(nextCheckpointAngle)<120){thrust ="40";}
+                if( Math.abs(nextCheckpointAngle)<90){thrust ="65";}
+                if( Math.abs(nextCheckpointAngle)<80){thrust ="90";}
+                if( Math.abs(nextCheckpointAngle)<65){thrust ="100";}
+            }else{thrust = "100";}//cruising
+        }
+        else{ // short dist
+            if( nextCheckpointAngle > 90){ thrust = "20";}
+            if( nextCheckpointAngle < 90){ thrust = "45";}
+            if( nextCheckpointAngle < 70){ thrust = "75";}
+            if( nextCheckpointAngle < 40){ thrust = "100";}
+            if(nextCheckpointDist < 1000 && nextCheckpointAngle < 40 ){ thrust = "40";}
+            if(nextCheckpointDist < 500 && nextCheckpointAngle < 40 ){
+                //if(Math.abs(opponentX-x)<400 && Math.abs(opponentY-y)<400 && opponentX>x && opponentY<y){thrust = "97";} 
+                //else if(Math.abs(x-opponentX)<400 && Math.abs(y-opponentY)<400 && x>opponentX && y>opponentY){thrust = "96";}
+                //else {
+                thrust = "30";}//}
+        }  
+    }  
+    else{thrust = "99";}
+
+
+  if (hasBoost && nextCheckpointDist > 3000 && nextCheckpointAngle < 5) {
+    thrust = "BOOST";
+    hasBoost = false;  
+    }
+
+
+
+            System.err.println("x : "+x);
+            System.err.println("boost : "+hasBoost);
+            System.err.println("previous : "+previousCheckpointX);
+            System.err.println("next : "+nextCheckpointX);
+            System.err.println("thrust : "+thrust);
+            System.err.println("next check angle : "+nextCheckpointAngle);
+            System.err.println("next check dist : "+nextCheckpointDist);
+            System.out.println(nextCheckpointX + " " + nextCheckpointY + " " + thrust);
+        }
+    }
+}
